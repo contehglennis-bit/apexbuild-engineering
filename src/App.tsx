@@ -1,8 +1,19 @@
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+
 function App() {
   return (
-    <main>
-      <h1 className="text-4xl font-bold">ApexBuild Engineering</h1>
-    </main>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="*"
+        element={
+          <main className="p-6">
+            <h1 className="text-2xl font-bold">Page not found</h1>
+          </main>
+        }
+      />
+    </Routes>
   )
 }
 

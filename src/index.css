@@ -1,1 +1,18 @@
+@import "@fontsource-variable/manrope";
 @import "tailwindcss";
+
+@theme {
+  --color-brand-navy: #0b1f33;
+  --color-brand-offwhite: #f7f7f4;
+  --color-brand-orange: #e87524;
+  --color-brand-gray: #667085;
+  --color-brand-charcoal: #17202a;
+
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-offwhite text-brand-charcoal antialiased;
+  }
+}
