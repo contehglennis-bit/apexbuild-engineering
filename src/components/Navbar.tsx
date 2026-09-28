@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const navLinks = [
@@ -12,22 +12,59 @@ const navLinks = [
 // Route for the future project inquiry page (not built yet).
 const inquiryRoute = '/start-a-project'
 
+// Shared by the desktop and mobile "Start a Project" buttons.
+const ctaClasses =
+  'inline-flex items-center justify-center gap-2 rounded-sm bg-brand-orange text-sm font-bold tracking-wider text-brand-navy uppercase hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
+
 function Navbar() {
   // true once the visitor has scrolled a little past the top of the page
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 10)
+  // true while the mobile menu panel is open
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  // lets us return keyboard focus to the menu button
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
+  const closeMenu = () => setIsMenuOpen(false)
+
+  // Scroll detection
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10)
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    // cleanup: stop listening when the Navbar is removed
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Close the menu with the Escape key (only listen while it is open)
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isMenuOpen])
+
+  // Close the menu if the window grows to the desktop layout (1024px+)
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 1024px)')
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsMenuOpen(false)
+    }
+
+    desktopQuery.addEventListener('change', handleChange)
+    return () => desktopQuery.removeEventListener('change', handleChange)
   }, [])
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition duration-300 ${
-        isScrolled
+        isScrolled || isMenuOpen
           ? 'border-white/10 bg-brand-navy shadow-md'
           : 'border-transparent bg-transparent'
       }`}
@@ -36,6 +73,7 @@ function Navbar() {
         {/* Logo: links back to the homepage */}
         <Link
           to="/"
+          onClick={closeMenu}
           className="flex items-center gap-3 text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
           <svg
@@ -70,14 +108,70 @@ function Navbar() {
               </li>
             ))}
             <li>
-              <Link
-                to={inquiryRoute}
-                className="inline-flex items-center gap-2 rounded-sm bg-brand-orange px-5 py-2.5 text-sm font-bold tracking-wider text-brand-navy uppercase hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-              >
+              <Link to={inquiryRoute} className={`${ctaClasses} px-5 py-2.5`}>
                 Start a Project <span aria-hidden="true">→</span>
               </Link>
             </li>
           </ul>
+        </nav>
+
+        {/* Mobile menu button: hidden from 1024px up */}
+        <button
+          ref={menuButtonRef}
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-7 w-7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="square"
+            aria-hidden="true"
+            focusable="false"
+          >
+            {isMenuOpen ? (
+              <path d="M5 5l14 14M19 5L5 19" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile navigation panel: hidden unless the menu is open */}
+      <div
+        id="mobile-menu"
+        className={`max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 lg:hidden ${
+          isMenuOpen ? 'block' : 'hidden'
+        }`}
+      >
+        <nav aria-label="Mobile" className="px-5 pt-2 pb-6 sm:px-8">
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.to} className="border-b border-white/10">
+                <Link
+                  to={link.to}
+                  onClick={closeMenu}
+                  className="block py-4 text-base font-semibold tracking-wider text-white uppercase focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to={inquiryRoute}
+            onClick={closeMenu}
+            className={`${ctaClasses} mt-6 w-full px-5 py-3.5`}
+          >
+            Start a Project <span aria-hidden="true">→</span>
+          </Link>
         </nav>
       </div>
     </header>
