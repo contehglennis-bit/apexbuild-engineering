@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="1200" fill="#132f4c" />
+  <rect width="1200" height="1200" fill="url(#grid)" />
+  <path d="M600 240 1000 960H830L600 560 370 960H200z" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2" />
+  <text x="600" y="1080" text-anchor="middle" font-family="sans-serif" font-size="28" letter-spacing="8" fill="#ffffff" fill-opacity="0.4">PLACEHOLDER IMAGE</text>
+</svg>
