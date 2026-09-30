@@ -1,5 +1,6 @@
 import CompanyIntro from '../components/CompanyIntro'
 import FeaturedProjects from '../components/FeaturedProjects'
+import FinalCTA from '../components/FinalCTA'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 import OurApproach from '../components/OurApproach'
@@ -15,6 +16,7 @@ function Home() {
         <Services />
         <FeaturedProjects />
         <OurApproach />
+        <FinalCTA />
       </main>
     </>
   )
