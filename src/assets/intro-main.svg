@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#dfe3e8" />
+  <rect x="60" y="360" width="220" height="200" fill="#98a2b3" />
+  <rect x="300" y="260" width="160" height="300" fill="#667085" />
+  <rect x="480" y="180" width="140" height="380" fill="#98a2b3" />
+  <rect x="0" y="540" width="800" height="60" fill="#4b5563" />
+  <text x="400" y="580" text-anchor="middle" font-family="sans-serif" font-size="20" letter-spacing="4" fill="#f7f7f4">PLACEHOLDER IMAGE</text>
+</svg>

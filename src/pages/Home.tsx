@@ -1,3 +1,4 @@
+import CompanyIntro from '../components/CompanyIntro'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 
@@ -7,6 +8,7 @@ function Home() {
       <Navbar />
       <main>
         <Hero />
+        <CompanyIntro />
       </main>
     </>
   )
