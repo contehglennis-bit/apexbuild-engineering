@@ -1,6 +1,7 @@
 import CompanyIntro from '../components/CompanyIntro'
 import FeaturedProjects from '../components/FeaturedProjects'
 import FinalCTA from '../components/FinalCTA'
+import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 import OurApproach from '../components/OurApproach'
@@ -18,6 +19,7 @@ function Home() {
         <OurApproach />
         <FinalCTA />
       </main>
+      <Footer />
     </>
   )
 }
