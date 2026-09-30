@@ -16,9 +16,12 @@ const inquiryRoute = '/start-a-project'
 const ctaClasses =
   'inline-flex items-center justify-center gap-2 rounded-sm bg-brand-orange text-sm font-bold tracking-wider text-brand-navy uppercase hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
 
-function Navbar() {
-  // true once the visitor has scrolled a little past the top of the page
-  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 10)
+function Navbar({ startSolid = false }: { startSolid?: boolean }) {
+  // true once the visitor has scrolled a little past the top of the page,
+  // or immediately when startSolid is set (non-homepage pages)
+  const [isScrolled, setIsScrolled] = useState(
+    () => startSolid || window.scrollY > 10,
+  )
   // true while the mobile menu panel is open
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   // lets us return keyboard focus to the menu button
@@ -28,11 +31,11 @@ function Navbar() {
 
   // Scroll detection
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10)
+    const handleScroll = () => setIsScrolled(startSolid || window.scrollY > 10)
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [startSolid])
 
   // Close the menu with the Escape key (only listen while it is open)
   useEffect(() => {
