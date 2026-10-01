@@ -2,6 +2,7 @@ import AboutHero from '../components/AboutHero'
 import CompanyStory from '../components/CompanyStory'
 import HowWeWork from '../components/HowWeWork'
 import Navbar from '../components/Navbar'
+import TeamPreview from '../components/TeamPreview'
 import WhatGuidesOurWork from '../components/WhatGuidesOurWork'
 
 function About() {
@@ -13,6 +14,7 @@ function About() {
         <CompanyStory />
         <WhatGuidesOurWork />
         <HowWeWork />
+        <TeamPreview />
       </main>
     </>
   )
