@@ -1,3 +1,4 @@
+import AboutClosingCTA from '../components/AboutClosingCTA'
 import AboutHero from '../components/AboutHero'
 import CompanyStory from '../components/CompanyStory'
 import HowWeWork from '../components/HowWeWork'
@@ -15,6 +16,7 @@ function About() {
         <WhatGuidesOurWork />
         <HowWeWork />
         <TeamPreview />
+        <AboutClosingCTA />
       </main>
     </>
   )
