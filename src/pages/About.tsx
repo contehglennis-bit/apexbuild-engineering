@@ -1,6 +1,7 @@
 import AboutClosingCTA from '../components/AboutClosingCTA'
 import AboutHero from '../components/AboutHero'
 import CompanyStory from '../components/CompanyStory'
+import Footer from '../components/Footer'
 import HowWeWork from '../components/HowWeWork'
 import Navbar from '../components/Navbar'
 import TeamPreview from '../components/TeamPreview'
@@ -18,6 +19,7 @@ function About() {
         <TeamPreview />
         <AboutClosingCTA />
       </main>
+      <Footer />
     </>
   )
 }
