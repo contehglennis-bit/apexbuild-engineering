@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import TeamHero from '../components/TeamHero'
+import TeamIntroduction from '../components/TeamIntroduction'
 
 function Team() {
   return (
@@ -7,6 +8,7 @@ function Team() {
       <Navbar startSolid />
       <main>
         <TeamHero />
+        <TeamIntroduction />
       </main>
     </>
   )
